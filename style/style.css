@@ -3,26 +3,50 @@
 }
 
 body {
-    background-image: url(../images/BattleFight.png);
-    background-repeat: repeat;
-    background-size: cover;
-    background-attachment: fixed;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 h1 {
-    color: white;
-    font-size: 4rem;
-    font-family: "Times New Roman", Times, serif;
-    display: flex;
-    justify-content: center;
+    margin-bottom: 20px;
 }
 
-h2 {
-    color: rgb(253, 252, 253);
-    font-size: 35px;
-    font-family: "Times New Roman", Times, serif;
-    justify-content: center;
-    margin: 0;
-    display: flex;
-    padding: 10px;
+.seleccion {
+    margin-bottom: 10px;
 }
+
+label, select {
+    font-size: 16px;
+}
+
+button {
+    font-size: 16px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#resultado {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+

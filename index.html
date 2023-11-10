@@ -1,24 +1,41 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=, initial-scale=1.0">
     <Link rel="stylesheet" href="style/style.css">
-    <title>Fight Battle</title>
-</head>
-<body>
-        <header>
-            <div class="container">
-                <h1 class="title"> Fight World</h1>
-                <h2 class="subtitle">Selecciona tu personaje favorito para iniciar la batalla</h2>
-            </div>
-        </header>
-    <main>
-
-    </main>
-    <footer>
-
-    </footer>
     <script src="js/main2.js"></script>
+    <title>Fight Battle</title>
+
+</head>
+
+<body>
+    <div class="container">
+        <h1>Battle Fight</h1>
+        <div class="seleccion">
+            <label for="selectPersonaje1">Selecciona tu personaje:</label>
+            <select id="selectPersonaje1">
+                <option value="1">Pikachu</option>
+                <option value="2">Link</option>
+                <option value="3">Mario</option>
+                <option value="4">Mewtwo</option>
+                <option value="5">Yoshi</option>
+            </select>
+        </div>
+        <div class="seleccion">
+            <label for="selectPersonaje2">Selecciona el personaje del contrincante:</label>
+            <select id="selectPersonaje2">
+                <option value="1">Pikachu</option>
+                <option value="2">Link</option>
+                <option value="3">Mario</option>
+                <option value="4">Mewtwo</option>
+                <option value="5">Yoshi</option>
+            </select>
+        </div>
+        <button id="iniciarJuego">Iniciar Batalla</button>
+        <div id="resultado"></div>
+    </div>
 </body>
+
 </html>
