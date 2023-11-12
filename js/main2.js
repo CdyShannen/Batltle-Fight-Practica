@@ -7,18 +7,11 @@ let personajes = [
   { nombre: "Yoshi", vida: 500, golpe: 150 },
 ];
 
-// Función para validar la opción
-function valido(opcion) {
-  return opcion >= 1 && opcion <= personajes.length;
-}
-
-// Función para obtener un personaje por su índice
-function obtenerPersonaje(index) {
-  return personajes[index];
-}
-
 // Función para realizar la batalla
 function realizarBatalla(personaje1, personaje2) {
+  console.log("Comienza la batalla entre " + personaje1.nombre + " y " + personaje2.nombre);
+  console.log(personaje1.nombre + " tiene " + personaje1.vida + " puntos de vida");
+  console.log(personaje2.nombre + " tiene " + personaje2.vida + " puntos de vida");
   while (personaje1.vida > 0 && personaje2.vida > 0) {
     personaje1.vida -= personaje2.golpe;
     personaje2.vida -= personaje1.golpe;
@@ -28,64 +21,48 @@ function realizarBatalla(personaje1, personaje2) {
     if (personaje2.vida < 0) {
       personaje2.vida = 0;
     }
-    console.log(personaje2.nombre + " ataca");
-    console.log("A " + personaje1.nombre + " le queda " + personaje1.vida + " de vida");
-    console.log(personaje1.nombre + " ataca");
-    console.log("A " + personaje2.nombre + " le queda " + personaje2.vida + " de vida");
+    console.log(personaje2.nombre + " ataca a " + personaje1.nombre);
+    console.log(personaje1.nombre + " tiene " + personaje1.vida + " puntos de vida");
+    console.log(personaje1.nombre + " ataca a " + personaje2.nombre);
+    console.log(personaje2.nombre + " tiene " + personaje2.vida + " puntos de vida");
   }
-  if (personaje1.vida <= 0 || personaje2.vida <= 0) {
-    if (personaje1.vida <= 0) {
-      console.log("El ganador es " + personaje2.nombre);
-      personajes = personajes.filter(personaje => personaje !== personaje1);
-    } else {
-      console.log("El ganador es " + personaje1.nombre);
-      personajes = personajes.filter(personaje => personaje !== personaje2);
-    }
+  if (personaje1.vida <= 0) {
+    console.log("El ganador de la batalla es " + personaje2.nombre);
+    return personaje2;
+  } else {
+    console.log("El ganador de la batalla es " + personaje1.nombre);
+    return personaje1;
   }
 }
 
-// Función para preguntar si desea continuar
-function continuar() {
-  const respuesta = prompt("¿Deseas continuar? (S/N)").toUpperCase();
-  return respuesta === "S";
-}
-
-// Obtener la selección del usuario
-let seleccion1 = parseInt(prompt(
-  "Elige el personaje con el que deseas luchar seleccionando el número asignado:\n1. Pikachu\n2. Link\n3. Mario\n4. Mewtwo\n5. Yoshi"
-));
-while (!valido(seleccion1)) {
-  seleccion1 = parseInt(prompt(
-    "Por favor, ingrese una opción válida para el personaje que deseas usar:"
+// Función para mostrar los personajes disponibles y obtener la selección del usuario
+function seleccionarPersonaje(personajesDisponibles) {
+  let opciones = "";
+  for (let i = 0; i < personajesDisponibles.length; i++) {
+    opciones += (i + 1) + ". " + personajesDisponibles[i].nombre + "\n";
+  }
+  let seleccion = parseInt(prompt(
+    "Elige el personaje con el que deseas jugar seleccionando el número asignado:\n" +
+    opciones
   ));
+  while (isNaN(seleccion) || seleccion < 1 || seleccion > personajesDisponibles.length) {
+    seleccion = parseInt(prompt("Por favor, ingresa una opción válida:"));
+  }
+  return personajesDisponibles[seleccion - 1];
 }
-let personaje1 = obtenerPersonaje(seleccion1 - 1);
-console.log(personaje1.nombre + " ha sido seleccionado");
 
-let seleccion2 = parseInt(prompt(
-  "Elige el personaje que va a usar tu contrincante:\n1 - Pikachu\n2 - Link\n3 - Mario\n4 - Mewtwo\n5 - Yoshi"
-));
-while (!valido(seleccion2)) {
-  seleccion2 = parseInt(prompt(
-    "Por favor, ingrese una opción válida para el personaje que va a usar tu contrincante:"
-  ));
+// Realizar las batallas hasta que quede un único ganador
+let ganadorFinal;
+for (let i = 0; i < personajes.length - 1; i++) {
+  let personaje1 = seleccionarPersonaje(personajes.filter(personaje => personaje.vida > 0));
+  let personajesDisponibles = personajes.filter(personaje => personaje !== personaje1 && personaje.vida > 0);
+  if (personajesDisponibles.length === 0) { 
+    break;
+  }
+  let personaje2 = seleccionarPersonaje(personajesDisponibles);
+  ganadorFinal = realizarBatalla(personaje1, personaje2);
+  console.log("--------------------------------------------");
 }
-let personaje2 = obtenerPersonaje(seleccion2 - 1);
-console.log(personaje2.nombre + " ha sido seleccionado");
 
-// Iniciar la batalla
-realizarBatalla(personaje1, personaje2);
-
-// Filtrar los personajes que quedaron con vida
-const personajesConVida = personajes.filter(personaje => personaje.vida > 0);
-console.log("Personajes con vida:", personajesConVida);
-
-// Mostrar un prompt con los nombres de los personajes con vida
-const seleccion3 = parseInt(prompt(
-  "Elige el personaje con el que deseas luchar seleccionando el número asignado:\n" +
-  personajesConVida.map((personaje, index) => (index + 1) + ". " + personaje.nombre).join("\n")
-));
-
-// Obtener el personaje seleccionado
-const personaje3 = obtenerPersonaje(personajes.indexOf(personajesConVida[seleccion3 - 1]));
-console.log(personaje3.nombre + " ha sido seleccionado");
+// Mostrar al ganador final
+console.log("El ganador final es " + ganadorFinal.nombre);
