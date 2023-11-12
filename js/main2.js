@@ -1,4 +1,4 @@
-// Definir objetos para los personajes
+// Objetos para los personajes
 let personajes = [
   { nombre: "Pikachu", vida: 500, golpe: 170 },
   { nombre: "Link", vida: 550, golpe: 150 },
@@ -7,7 +7,7 @@ let personajes = [
   { nombre: "Yoshi", vida: 500, golpe: 150 },
 ];
 
-// Función para realizar la batalla
+// Función para la batalla
 function realizarBatalla(personaje1, personaje2) {
   console.log("Comienza la batalla entre " + personaje1.nombre + " y " + personaje2.nombre);
   console.log(personaje1.nombre + " tiene " + personaje1.vida + " puntos de vida");
@@ -51,7 +51,7 @@ function seleccionarPersonaje(personajesDisponibles) {
   return personajesDisponibles[seleccion - 1];
 }
 
-// Realizar las batallas hasta que quede un único ganador
+// Batallas hasta que quede un único ganador
 let ganadorFinal;
 for (let i = 0; i < personajes.length - 1; i++) {
   let personaje1 = seleccionarPersonaje(personajes.filter(personaje => personaje.vida > 0));
@@ -64,5 +64,5 @@ for (let i = 0; i < personajes.length - 1; i++) {
   console.log("--------------------------------------------");
 }
 
-// Mostrar al ganador final
+// Ganador final
 console.log("El ganador final es " + ganadorFinal.nombre);
