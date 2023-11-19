@@ -1,52 +1,92 @@
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
 body {
     font-family: Arial, sans-serif;
     text-align: center;
+    background-image: url(https://www.shutterstock.com/image-vector/space-background-dark-infinite-universe-600nw-1703244802.jpg);
 }
 
-.container {
-    max-width: 600px;
-    margin: 0 auto;
+/*MAIN*/
+
+main section h1 {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.507);
+    text-align: center;
+    font-family: 'Kdam Thmor Pro', sans-serif;
+    font-size: 100px;
+    font-weight: 300;
+    padding: 15px;
+}
+
+main section .cuidados {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+}
+
+main section div>div {
+    flex-basis: calc(25% - 80px);
+    text-align: center;
+    font-family: "Fjalla One", sans-serif;
     padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
 }
 
-h1 {
-    margin-bottom: 20px;
-}
-
-.seleccion {
+main section div>div img {
+    max-width: 100%;
     margin-bottom: 10px;
 }
 
-label, select {
-    font-size: 16px;
+main section div>div h2,
+main section div>div p {
+    margin: 10px 0;
 }
 
-button {
-    font-size: 16px;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+main h1 {
+    color: black;
+    text-align: center;
+    font-size: 40px;
+    font-family: "Fjalla One", sans-serif;
+    font-weight: 300px;
+    margin-top: 15px;
 }
 
-button:hover {
-    background-color: #0056b3;
+footer.footer-grids {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    text-align: center;
 }
 
-#resultado {
-    margin-top: 20px;
-    font-size: 18px;
-    font-weight: bold;
+footer.footer-grids div {
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    color: white;
 }
 
+footer.footer-grids div img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
 
+footer.footer-grids div h2 {
+    margin: 10px 0;
+    font-size: 1.2rem;
+}
+
+footer.footer-grids div p {
+    line-height: 1.4;
+}
