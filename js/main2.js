@@ -1,11 +1,27 @@
 // Objetos para los personajes
 let personajes = [
-  { nombre: "Pikachu", vida: 500, golpe: 170 },
-  { nombre: "Link", vida: 550, golpe: 150 },
-  { nombre: "Mario", vida: 600, golpe: 155 },
-  { nombre: "Mewtwo", vida: 500, golpe: 165 },
-  { nombre: "Yoshi", vida: 500, golpe: 150 },
+  { nombre: "PIKACHU", vida: 500, golpe: 170 },
+  { nombre: "LINK", vida: 550, golpe: 150 },
+  { nombre: "MARIO", vida: 600, golpe: 155 },
+  { nombre: "MEWTWO", vida: 500, golpe: 165 },
+  { nombre: "YOSHI", vida: 500, golpe: 150 },
 ];
+
+//Botones de personajes
+let PIKACHU1 = document.querySelector("[data-personaje='PIKACHU']");
+let LINK1 = document.querySelector("[data-personaje='LINK']");
+let MARIO1 = document.querySelector("[data-personaje='MARIO']");
+let MEWTWO1 = document.querySelector("[data-personaje='MEWTWO']");
+let YOSHI1 = document.querySelector("[data-personaje='YOSHI']");
+
+// Función para mostrar información de la batalla en el DOM
+function iniciarBatallaInfo(personajeUsuario, personajeContrincante) {
+  let resultadoBatalla = document.getElementById("resultado-batalla");
+  resultadoBatalla.innerHTML = `
+    <p>${personajeUsuario} vs ${personajeContrincante.nombre}</p>
+    <p>¡La batalla ha comenzado!</p>
+  `;
+}
 
 // Función para la batalla
 function realizarBatalla(personaje1, personaje2) {
@@ -35,31 +51,38 @@ function realizarBatalla(personaje1, personaje2) {
   }
 }
 
-// Función para mostrar los personajes disponibles y obtener la selección del usuario
-function seleccionarPersonaje(personajesDisponibles) {
-  let opciones = "";
-  for (let i = 0; i < personajesDisponibles.length; i++) {
-    opciones += (i + 1) + ". " + personajesDisponibles[i].nombre + "\n";
-  }
-  let seleccion = parseInt(prompt(
-    "Elige el personaje con el que deseas jugar seleccionando el número asignado:\n" +
-    opciones
-  ));
-  while (isNaN(seleccion) || seleccion < 1 || seleccion > personajesDisponibles.length) {
-    seleccion = parseInt(prompt("Por favor, ingresa una opción válida:"));
-  }
-  return personajesDisponibles[seleccion - 1];
+// Función para iniciar la batalla
+function iniciarBatalla(personajeSeleccionado) {
+  console.log("INICIAR BATALLA: " + personajeSeleccionado);
+  [PIKACHU1, LINK1, MARIO1, MEWTWO1, YOSHI1].forEach(personajeBtn => {
+    personajeBtn.style.display = "none";
+  });
+  document.querySelector(`[data-personaje='${personajeSeleccionado}']`).style.display = "block";
+  console.log("2 " + personajeSeleccionado);
+  let personaje = personajes.find(personaje => personaje.nombre === personajeSeleccionado);
+  const personajeAleatorio = personajes[Math.floor(Math.random() * personajes.length)];
+  this.realizarBatalla(personaje, personajeAleatorio);
 }
+
+//Evento click a los botones de selección
+const seleccionarBtns = document.querySelectorAll(".seleccionar-btn");
+seleccionarBtns.forEach(btn => {
+  btn.addEventListener("click", () => {
+    console.log("ENTRO");
+    const personajeSeleccionado = btn.getAttribute("data-personaje");
+    iniciarBatalla(personajeSeleccionado);
+  });
+});
 
 // Batallas hasta que quede un único ganador
 let ganadorFinal;
 for (let i = 0; i < personajes.length - 1; i++) {
-  let personaje1 = seleccionarPersonaje(personajes.filter(personaje => personaje.vida > 0));
+  let personaje1 = personajes.filter(personaje => personaje.vida > 0)[0];
   let personajesDisponibles = personajes.filter(personaje => personaje !== personaje1 && personaje.vida > 0);
   if (personajesDisponibles.length === 0) { 
     break;
   }
-  let personaje2 = seleccionarPersonaje(personajesDisponibles);
+  let personaje2 = personajesDisponibles[Math.floor(Math.random() * personajesDisponibles.length)];
   ganadorFinal = realizarBatalla(personaje1, personaje2);
   console.log("--------------------------------------------");
 }
